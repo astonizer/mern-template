@@ -5,13 +5,13 @@ function PrivateRoute({ component: Component, ...rest }) {
 	return (
 		<Route
 			{...rest}
-			render={props => {
+			render={props =>
 				localStorage.getItem('authToken') ? (
 					<Component {...props} />
 				) : (
 					<Redirect to="/auth/login" />
-				);
-			}}
+				)
+			}
 		/>
 	);
 }
