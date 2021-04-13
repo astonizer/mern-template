@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import './App.css';
 
-import loadUser from './redux/actions/authActions';
+import { loadUser } from './redux/actions/authActions';
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import Profile from './components/Profile/Profile';
@@ -13,13 +14,14 @@ import Header from './components/Header/Header';
 
 function App() {
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatchEvent(loadUser());
-	}, []);
+		dispatch(loadUser());
+	}, [dispatch]);
 	return (
 		<div className="app">
-			<Header />
+			<Header history={history} />
 			<Switch>
 				<PrivateRoute exact path="/profile" component={Profile} />
 				<Route exact path="/" component={Home} />

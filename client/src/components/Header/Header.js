@@ -1,8 +1,16 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logoutUser } from '../../redux/actions/authActions';
 import './Header.css';
 
-function Header() {
+function Header({ history }) {
+	const dispatch = useDispatch();
+
+	const handleLogout = e => {
+		dispatch(logoutUser());
+		history.push('/');
+	};
 	return (
 		<div className="header">
 			<h1>MERN Project with Authentication</h1>
@@ -21,6 +29,11 @@ function Header() {
 					<li>
 						<Link className="header_link" to="/auth/login">
 							Login
+						</Link>
+					</li>
+					<li>
+						<Link className="header_link" onClick={handleLogout}>
+							Logout
 						</Link>
 					</li>
 					<li>

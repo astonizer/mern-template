@@ -4,11 +4,11 @@ import { returnErrors } from './errorActions';
 import {
 	AUTH_ERROR,
 	AUTH_SUCCESS,
+	LOGOUT_SUCCESS,
 	REGISTER_FAIL,
 	REGISTER_SUCCESS,
-	USER_LOADING,
 } from '../constants/authConstants';
-import { GET_ERRORS } from '../constants/errorConstants';
+// import { GET_ERRORS } from '../constants/errorConstants';
 
 export const registerUser = user => async dispatch => {
 	// Request headers
@@ -20,16 +20,21 @@ export const registerUser = user => async dispatch => {
 
 	axios
 		.post('/api/auth/register', JSON.stringify(user), config)
-		.then(res => dispatch({ type: REGISTER_SUCCESS, payload: res.data }))
+		.then(res => {
+			console.log(res);
+			dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+		})
 		.catch(err => {
 			dispatch({ type: REGISTER_FAIL });
 			dispatch(returnErrors('Register failed', 404));
 		});
 };
 
-export const loadUser = () => (dispatch, getState) => {
-	dispatch({ type: USER_LOADING });
+export const logoutUser = () => dispatch => {
+	dispatch({ type: LOGOUT_SUCCESS });
+};
 
+export const loadUser = () => dispatch => {
 	const token = localStorage.getItem('authToken');
 
 	if (!token) {

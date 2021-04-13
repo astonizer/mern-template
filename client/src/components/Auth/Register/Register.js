@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './Register.css';
-import registerUser from '../../../redux/actions/authActions';
+import { registerUser } from '../../../redux/actions/authActions';
 
 function Register({ history }) {
 	const [user, setUser] = useState({
@@ -9,6 +10,7 @@ function Register({ history }) {
 		password: '',
 	});
 	// const [error, setError] = useState('');
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (localStorage.getItem('authToken')) {
@@ -23,7 +25,7 @@ function Register({ history }) {
 	const handleSubmit = e => {
 		e.preventDefault();
 		console.log(user);
-		registerUser(user);
+		dispatch(registerUser(user));
 		history.push('/');
 	};
 
