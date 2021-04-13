@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../../redux/actions/authActions';
 import './Login.css';
 
 function Login({ history }) {
@@ -7,6 +9,7 @@ function Login({ history }) {
 		password: '',
 	});
 	// const [error, setError] = useState('');
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (localStorage.getItem('authToken')) {
@@ -20,7 +23,7 @@ function Login({ history }) {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log(user);
+		dispatch(loginUser(user));
 		history.push('/');
 	};
 

@@ -1,7 +1,6 @@
 import React from 'react';
 
-function Profile(props) {
-	console.log(props);
+function Profile() {
 	return <div>Congratulations</div>;
 }
 

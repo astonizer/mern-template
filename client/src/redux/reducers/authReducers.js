@@ -9,7 +9,7 @@ import {
 } from '../constants/authConstants';
 
 const initialState = {
-	token: localStorage.getItem('token'),
+	token: localStorage.getItem('authToken'),
 	isAuthenticated: null,
 };
 
@@ -24,11 +24,10 @@ export default function authReducers(state = initialState, action) {
 
 		case LOGIN_SUCCESS:
 		case REGISTER_SUCCESS:
-			console.log(action.payload);
-			localStorage.setItem('authToken', action.payload.token);
+			localStorage.setItem('authToken', action.payload);
 			return {
 				...state,
-				...action.payload,
+				token: action.payload,
 				isAuthenticated: true,
 			};
 

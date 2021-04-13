@@ -32,7 +32,11 @@ function Header({ history }) {
 						</Link>
 					</li>
 					<li>
-						<Link className="header_link" onClick={handleLogout}>
+						<Link
+							className="header_link"
+							onClick={handleLogout}
+							to="#"
+						>
 							Logout
 						</Link>
 					</li>
